@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     lineShare: function () {
-      ga("send", {
+      ga("newmedia.send", {
         "hitType": "event",
         "eventCategory": "Line Share",
         "eventAction": "click",
@@ -52,7 +52,6 @@ export default {
 <style scoped>
   .share-block{
       height: 28px;
-      margin-bottom: 10px;
   }
   .fb-send-block{
       float: left;

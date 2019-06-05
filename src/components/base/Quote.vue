@@ -81,10 +81,6 @@ export default {
   @media screen and (max-width: 767px) {
     .quote-img{
       text-align: center;
-      img {
-        width: 40%;
-        margin-bottom: 18px;
-      }
     }
     .quote-contain{
       font-size: 26px;
@@ -96,11 +92,6 @@ export default {
     }
     .quote-ref{
       font-size: 17px;
-    }
-    .quote-img{
-      img {
-        width: 100%;
-      }
     }
   }
 </style>

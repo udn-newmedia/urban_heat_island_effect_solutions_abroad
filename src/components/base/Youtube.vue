@@ -73,10 +73,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.embed-youtube{
+.youtubeIframe{
   position: relative;
   z-index: 50;
   width: 100%;
-  max-height: 100vh;
+  height: 100vh;;
+  .embed-responsive-item {
+    width: inherit;
+    height: inherit;
+  }
 }
 </style>

@@ -14,6 +14,5 @@ export default {
   #editor{
     font-size: 15px;
     color: gray;
-    font-weight: normal;
   }
 </style>

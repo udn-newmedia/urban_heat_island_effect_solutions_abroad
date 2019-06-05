@@ -6,7 +6,6 @@
         <!-- <a href=""><img class="other_logo" src="../../static/otherlogo.jpg" alt=""></a> -->
         <slot name="logo"></slot>
       </div>
-      
       <div v-if="showMenu" class="menu_box">
         <div class="burger-icon" :class="{ 'burger-open': isMenuOpen }" @click="handle_Burger()">
           <span :style="{ backgroundColor: setProps('iconColor') }"></span>
@@ -16,7 +15,6 @@
         </div>
       </div>
     </div>
-
     <div class="menu_list" @click="handle_Burger()" :class="{'menu_list-show': showMenuList}">
       <div class="link_box">
         <div class="link_item" :style="{ color: setProps('iconColor') }">
@@ -24,7 +22,6 @@
         </div>
       </div>
     </div>
-
     <nav v-if="anchorMenu.length > 0" class="scroll_nav" :class="{ 'nav_show': isNavShow }">
       <div v-if="canNavScroll" class="nav_arrow nav_arrow-left"
       @click="handle_nav_arrow('left')">
@@ -38,7 +35,6 @@
         <i class="fa fa-chevron-right fa-1x" aria-hidden="true"></i>
       </div>
     </nav>
-
     <div class="scrollHint" v-show="showScrollHint" ref="scrollHinter">
       <span>Tip: Shift+滾輪滾動</span>
     </div>
@@ -79,9 +75,7 @@ export default {
       showMenuList: false,
       showScrollHint: false,
       anchorIndex: 0,
-      anchorScroll: 0,
-      scrollCount: 0,
-      scrollDirection: 'down'
+      anchorScroll: 0
       // pass from anchor by vuex
       // anchorMenu: [
       //   {
@@ -111,10 +105,7 @@ export default {
       'resetAnchorActive'
     ]),
     handle_scroll () {
-      this.scrollCount = window.scrollY
-      
       let currentH = window.pageYOffset
-      //  || this.scrollDirection === 'down'
       if (currentH < 2) {
         this.header_top = 0
         this.isMenuOpen === false ? this.bar_color = 'transparent' : this.bar_color = this.setProps('headColor')
@@ -128,12 +119,10 @@ export default {
           }
         }
       } else {
-
         this.header_top = 2
         this.bar_color = this.setProps('headColor')
         this.isNavShow = true
         this.showMenuList = true
-        
       }
       if (this.anchorMenu.length > 0) {
         this.handle_nav()
@@ -141,14 +130,12 @@ export default {
     },
     handle_scrollTo: _throttle(function (title, id) {
       $('html, body').animate({ scrollTop: $('#' + id).offset().top - 85 }, 1333)
-
-      window.ga("send", {
+      window.ga("newmedia.send", {
         "hitType": "event",
         "eventCategory": "headbar",
         "eventAction": "click",
         "eventLabel": "[" + Utils.detectPlatform() + "] [" + document.querySelector('title').innerHTML + "] [" + title + "] [HeadBar 內滾點擊]"
       })
-
     }, 1000, {leading: true, trailing: false}),
     handle_nav () {
       let currentH = window.pageYOffset
@@ -195,7 +182,7 @@ export default {
           window.pageYOffset < 2 ? this.bar_color = 'transparent' : this.bar_color = this.setProps('headColor')
         }, 444)
       }
-      window.ga("send", {
+      window.ga("newmedia.send", {
         "hitType": "event",
         "eventCategory": "hamburger",
         "eventAction": "click",
@@ -211,7 +198,7 @@ export default {
       }
     }, 333),
     handle_logoGA () {
-      window.ga("send", {
+      window.ga("newmedia.send", {
         "hitType": "event",
         "eventCategory": "hamburger",
         "eventAction": "click",
@@ -224,15 +211,6 @@ export default {
       Utils.detectIE() < 16 ? this.isIE = true : this.isIE = false
     }
   },
-  // watch: {
-  //   scrollCount: _throttle(function (newNavValue, oldNavValue) {
-  //     if(newNavValue > oldNavValue){
-  //       this.scrollDirection = 'down'
-  //     } else {
-  //       this.scrollDirection = 'up'
-  //     }
-  //   }, 500)
-  // },
   mounted () {
     const vm = this
     window.addEventListener('scroll', this.handle_scroll)
@@ -242,7 +220,7 @@ export default {
         if (this.$slots.default[i].elm.innerHTML !== undefined && this.$slots.default[i].tag === 'a') {
           this.$slots.default[i].elm.addEventListener('click', function (e) {
             e.stopPropagation()
-            window.ga("send", {
+            window.ga("newmedia.send", {
               "hitType": "event",
               "eventCategory": "headbar",
               "eventAction": "click",
@@ -286,7 +264,7 @@ export default {
       for (let i = 0; i < this.$slots.default.length; i++) {
         if (this.$slots.default[i].elm.innerHTML !== undefined && this.$slots.default[i].tag === 'a') {
           this.$slots.default[i].elm.removeEventListener('click', function () {
-            window.ga("send", {
+            window.ga("newmedia.send", {
               "hitType": "event",
               "eventCategory": "headbar",
               "eventAction": "click",
@@ -321,7 +299,7 @@ export default {
 <style lang="scss" scoped>
 .header{
   position: fixed;
-  z-index: 100;
+  z-index: 9999;
   width: 100%;
   height: 48px;
   transition: transform 222ms ease-out, height 444ms linear;
@@ -338,7 +316,6 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding-right: 48px;
-  transition: transform 3s;
 }
 .logo_box{
   position: relative;
@@ -495,7 +472,7 @@ export default {
     color: inherit;
     transition: 222ms ease;
     border-bottom: 1px solid lightgray;
-    padding: 15px;
+    padding: 0 15px;
     color: inherit;
     text-decoration: none;
     @media screen and (min-width: 1024px) {
@@ -515,7 +492,7 @@ export default {
   display: flex;
   align-items: center;
   transform: translate3d(0, -200%, 0);
-  transition: transform 3s ease-out;
+  transition: transform 432ms ease-out;
   padding: 0 12px;
   @media screen and (min-width: 1024px) {
     top: 31px;
@@ -527,7 +504,6 @@ export default {
   background-color: #fff;
   transform: translate3d(0, 0, 0);
   box-shadow: 0 8px 6px -6px rgba(#a4a4a4, .3);
-  transition: transform 0.5s ease-out;
 }
 .nav_list{
   position: relative;

@@ -79,11 +79,9 @@ export default {
 .image-contain {
   img {
     width: 100%;
-    height: 100vh;
   }
 }
 .description {
-  text-align: center;
   margin-top: 5px;
   font-size: 17px;
   color: gray;

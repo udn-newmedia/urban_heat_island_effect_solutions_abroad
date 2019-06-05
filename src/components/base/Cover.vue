@@ -85,6 +85,7 @@ export default {
 .Cover{
   position: relative;
   z-index: 50;
+  // width: 100%;
   height: 100vh;
   display: flex;
   padding: 28.8888% 7.7777%;
